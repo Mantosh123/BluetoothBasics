@@ -10,6 +10,7 @@ import CoreBluetooth
 
 class ViewController: UIViewController, CBCentralManagerDelegate {
     
+    @IBOutlet weak var bluetoothCurrentStatusLabel: UILabel!
     var centralManager = CBCentralManager()
     
     override func viewDidLoad() {
@@ -21,8 +22,10 @@ class ViewController: UIViewController, CBCentralManagerDelegate {
         
         if central.state == CBManagerState.poweredOn {
             print("your Bluetooth is ON")
+            bluetoothCurrentStatusLabel.text = "ON"
         } else {
             print("your bluetooth is OFF")
+            bluetoothCurrentStatusLabel.text = "OFF"
         }
     }
     
