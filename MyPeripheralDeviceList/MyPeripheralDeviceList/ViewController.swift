@@ -38,6 +38,20 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         centeralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setStatusBarBGColor()
+    }
+    
+    private func setStatusBarBGColor () {
+        let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        // https://stackoverflow.com/a/57899013/7316675
+        let statusBar = UIView(frame: window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+        statusBar.backgroundColor = .orange
+        window?.addSubview(statusBar)
+        navigationController?.navigationBar.backgroundColor = .orange
+    }
+    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         
         if central.state == CBManagerState.poweredOn {
@@ -54,7 +68,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         var scanPeripheral = ScandPeripheral(name: peripheral.name ?? "unknown Device", identifire: peripheral.identifier, state: peripheral.state, sPeripheral: peripheral)
         
         //if (self.scanedPeripheralList.contains(scanPeripheral)) {
-             scanedPeripheralList.append(scanPeripheral)
+        scanedPeripheralList.append(scanPeripheral)
         //}
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
