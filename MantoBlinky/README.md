@@ -13,11 +13,6 @@ if central.state == CBManagerState.poweredOn {
 }
 ```
 
-### Added Three Project in this
-- MyPeripheralDeviceList
-- BluetoothCurrentStatusDemo
-- MantoBlinky 
-
 
 ## License
 
